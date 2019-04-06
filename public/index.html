@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <!-- title -->
+    <title>GhostedBy</title>
+    <!-- viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+      maximum-scale=1.0" />
+    <!-- css reset -->
+    <link rel=“stylesheet” href="./styles/reset.css">
+    <!-- materialize -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Khula|Spectral"
+      rel="stylesheet">
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <!-- css formatting -->
+    <link href="./styles/style.css" type="text/css" rel="stylesheet"
+      media="screen,projection" />
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+  </head>
+
+  <body>
+<div class="row" id="Banner">
+  <div class="col s12 m8 offset-l2">
+    <div class="container center-align">
+      <h1>GhostedBy</h1>
+    </div>
+  </div>
+</div>
+    <!-- header on page -->
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container center-align">
+
+        <h4><b>Helping job seekers research companies <b></h4>
+            <h4><b>Helping companies manage their reputation</b></h4>
+            <h5>Report violators. Research trending companies. Become more
+              productive in your job search.</h5>
+            <br>
+          </div>
+        </div>
+
+        <!-- card to reporting a company -->
+        <div class="row">
+
+          <!-- card to lookup a company -->
+          <div class="col s12 m8 offset-l2">
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <span class="card-title">Lookup or Report a Company</span>
+                <p>Lookup a company to see if others have been GhostedBy them or report a company for ghosting.</p>
+              </div>
+              <div class="card-action">
+                <input id="lookup-company" placeholder="Enter company name"
+                  type="text" class="validate">
+                <a href="#resultModal" class="modal-trigger waves-effect
+                  waves-light btn" id="lookup-btn">Lookup or Report a Company</a>
+              </div>
+            </div>
+          </div>
+
+          <!--Modal to show search results -->
+          <div id="resultModal" class="modal blue-grey darken-1">
+            <div class="modal-content white-text">
+              <h4 id="companyName"></h4>
+              <p id="timesReported"></p>
+            </div>
+            <div class="modal-footer">
+              <a href="#!" class="waves-effect waves-light btn left"
+                id="report-searched">Report this company</a>
+              <a href="#!" class="modal-close waves-effect waves-green
+                btn-flat">Close</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- trending report div -->
+        <div class="row">
+          <div class="col s12 m8 offset-l2">
+            <div class="card blue-grey darken-1">
+              <div class="card-content white-text">
+                <span class="card-title">Trending Ghostedby Companies</span>
+                <!-- <br> -->
+                <table class="highlight">
+                  <thead>
+                    <tr>
+                      <a class="waves-effect waves-light btn timeframeSelect" id="lifetime">Lifetime</a>
+                      <a class="waves-effect waves-light btn timeframeSelect" id="30day">30 Days</a>
+                      <a class="waves-effect waves-light btn timeframeSelect" id="7day">7 Days</a>
+                      <th>Company</th>
+                      <th id="timeframe"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="report-display">
+
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- footer -->
+        <footer class="page-footer footer-bg-color">
+          <div class="container">
+
+            <!-- rules of conduct and responsible reporting -->
+            <p>If you have ever been on an interview and never heard back from
+              the company then you have been GhostedBy!</p>
+          </p>Please submit companies you've been GhostedBy to this database
+          with integrity and honesty as this is
+          intended to be a source for candidates to share and research company
+          activities for a more productive job search.
+          GhostedBy is a crowdsource database collecting the wisdom of the crowd
+          to report companies who ghost candidates.
+          Please report responsibly.
+        </p>
+        <!-- definition -->
+        <h5> “Ghosting is breaking off a relationship by ceasing all
+          communication and contact with the former partner
+          without any apparent warning or justification, as well as ignoring the
+          former partner's attempts to reach out
+          or communicate.”
+        </h5>
+        <br>
+        <!-- copyright -->
+        <img src="./img/50x50.png" alt="">
+        <h6>For media inquiries or feedback please contact us at ghostedbymedia@gmail.com</h6>
+        <h6>GhostedBy © 2019</h6>
+      </div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./js/index.js"></script>
+
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbyk8K108Ko9KQlMx7jtjPmga2wn0IpJs&libraries=places&callback=initAutocomplete"
+      async defer></script>
+
+
+  </body>
+
+</html>
