@@ -19,7 +19,7 @@ $('.modal').modal({
   // Declaring a function to run before the modal opens
   onOpenStart: function () {
     if (company === "") {
-      $("#companyName").append("Please enter a company name.")
+      $("#companyName").append("Please enter a company name and press Enter to search.")
       $("#report-searched").hide();
     } else {
       $("#report-searched").show();
