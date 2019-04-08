@@ -18,7 +18,7 @@ without any apparent warning or justification, as well as ignoring the former pa
 out or communicate.”
 
 # Deployed URL
-https://officialghostedby.herokuapp.com
+https://ghostedby.herokuapp.com/
 
 ![GhostedBy](https://github.com/leronj23/GhostedBy/blob/master/screenshot/ghosted-by.jpg)
 
