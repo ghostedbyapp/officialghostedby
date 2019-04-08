@@ -7,76 +7,79 @@ var lookupButton = $("#lookup-btn");
 
 // Contents of top five end up in here
 var div = $("#trending-report");
-var company = $("#lookup-company").val()
+var company = $("#lookup-company").val();
 
-$(document).ready(function(){
-  // Click event to capture the searched company
-  lookupButton.click(function() {
-    company = $("#lookup-company").val()
-  });
-  $('.modal').modal({
-    // Declaring a function to run before the modal opens
-    onOpenStart: function() {
-      if (company === "") {
-        $("#companyName").append("Please enter a company name.")
-        $("#report-searched").hide();
-      } else {
-        $("#report-searched").show();
+// $(document).ready(function () {
+// Click event to capture the searched company
+// lookupButton.click(function () {
+//   company = $("#lookup-company").val()
+// });
+
+$('.modal').modal({
+  // Declaring a function to run before the modal opens
+  onOpenStart: function () {
+    if (company === "") {
+      $("#companyName").append("Please enter a company name.")
+      $("#report-searched").hide();
+    } else {
+      $("#report-searched").show();
       $.ajax({
         method: "POST",
         url: "/api/lookup",
         data: companyResult
       })
-      .then(function (data) {
-        console.log(data);
-      
-        $("#companyName").append(company)
+        .then(function (data) {
+          console.log(data);
 
-        // If the company is found in the database, we perform an ajax call to get the total number of times
-        // the company has been reported, and display this in the modal.
-        if (data.found == true) {
-          $.ajax({
-            method: "GET",
-            url: "/api/ghostedCount/" + data.info.company_id
-          }).then(function(count) {
-            console.log(count[0]);
-            $("#timesReported").append("This company has been reported " + count[0].ghostedCounts[0].count + " time(s).")
-          })
+          $("#companyName").append(company)
 
-          // If the company is not in the database, we display a generic message.
-        } else {
-          $("#timesReported").append("This company has not yet been reported.")
-        }
-        // $("#report-searched").click(function() {
-        //   reportCompany(companyResult)
-        // })
-      });
-      }
-      
-    },
-    onCloseEnd: function() {
-      $("#companyName").empty();
-      $("#timesReported").empty();
-      $("#lookup-company").val("");
-      companyResult = {};
+          // If the company is found in the database, we perform an ajax call to get the total number of times
+          // the company has been reported, and display this in the modal.
+          if (data.found == true) {
+            $.ajax({
+              method: "GET",
+              url: "/api/ghostedCount/" + data.info.company_id
+            }).then(function (count) {
+              console.log(count[0]);
+              $("#timesReported").append("This company has been reported " + count[0].ghostedCounts[0].count + " time(s).")
+            })
+
+            // If the company is not in the database, we display a generic message.
+          } else {
+            $("#timesReported").append("This company has not yet been reported.")
+          }
+          // $("#report-searched").click(function() {
+          //   reportCompany(companyResult)
+          // })
+        });
     }
-  });
 
-  getLifetimeReport()
+  },
+  onCloseEnd: function () {
+    $("#companyName").empty();
+    $("#timesReported").empty();
+    $("#lookup-company").val("");
+    companyResult = {};
+  }
 });
 
-lookupButton.click(function() {
-  console.log(company)
-})
+
+getLifetimeReport();
+
+
+// lookupButton.click(function() {
+//   console.log(company)
+// })
+
 function getLifetimeReport() {
   $.ajax({
     method: "POST",
     url: "/api/lifetime"
   })
-  .then(function(data) {
-    $("#timeframe").text("Total reports")
-    displayReport(data);
-  })
+    .then(function (data) {
+      $("#timeframe").text("Total reports")
+      displayReport(data);
+    })
 }
 
 function get30DayReport() {
@@ -84,10 +87,10 @@ function get30DayReport() {
     method: "POST",
     url: "/api/last30days"
   })
-  .then(function(data) {
-    $("#timeframe").text("Reports in the last 30 days")
-    displayReport(data);
-  })
+    .then(function (data) {
+      $("#timeframe").text("Reports in the last 30 days")
+      displayReport(data);
+    })
 }
 
 function get7DayReport() {
@@ -95,10 +98,10 @@ function get7DayReport() {
     method: "POST",
     url: "/api/last7days"
   })
-  .then(function(data) {
-    $("#timeframe").text("Reports in the last 7 days")
-    displayReport(data);
-  })
+    .then(function (data) {
+      $("#timeframe").text("Reports in the last 7 days")
+      displayReport(data);
+    })
 }
 
 function displayReport(report) {
@@ -129,13 +132,14 @@ function reportCompany(company) {
 $("#lifetime").on("click", getLifetimeReport);
 $("#30day").on("click", get30DayReport);
 $("#7day").on("click", get7DayReport);
-   
-$("#report-searched").on("click", function() {
+
+$("#report-searched").on("click", function () {
   reportCompany(companyResult);
   $("#report-searched").hide();
   $("#timesReported").empty();
   $("#timesReported").append("Company succesfully reported. Click close to continue searching.");
 });
+// });
 
 var autocompleteReport;
 var autocompleteLookup;
@@ -150,6 +154,8 @@ var componentForm = {
 };
 
 var companyResult = {};
+
+
 
 function initAutocomplete() {
 
@@ -187,6 +193,13 @@ function getCompanyLookupName() {
 
   var place = autocompleteLookup.getPlace();
 
+  if (!place.geometry) {
+    // User entered the name of a Place that was not suggested and
+    // pressed the Enter key, or the Place Details request failed.
+    window.alert("No details available for input: '" + place.name + "'");
+    return;
+  }
+
   document.getElementById("lookup-company").value = '';
   document.getElementById("lookup-company").value = place.name;
 
@@ -196,6 +209,9 @@ function getCompanyLookupName() {
 function fillInAddress(place) {
   // Get the place details from the autocomplete object.
   //var place = autocomplete.getPlace();
+
+  company = $("#lookup-company").val()
+  $('.modal').modal('open');
 
   //console.log("place:", place);
   companyResult['company_name'] = place.name;
